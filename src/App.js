@@ -1,23 +1,41 @@
-import logo from './logo.svg';
-import './App.css';
+// App.js
+import React from "react";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useLocation,
+} from "react-router-dom";
+import Login from "./Pages/Login";
+import Register from "./Pages/Register";
+import Home from "./Pages/Home";
+import Footer from "./Components/Footer";
+import Navbar from "./Components/Navbar";
+import NotFound from "./Pages/NotFound"; // Import the NotFound component
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <Router>
+      <Main />
+    </Router>
+  );
+}
+
+function Main() {
+  const location = useLocation();
+  const hideNavBar =
+    location.pathname === "/login" || location.pathname === "/register";
+
+  return (
+    <div>
+      {!hideNavBar && <Navbar />}
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="*" element={<NotFound />} /> {/* Wildcard route */}
+      </Routes>
+      {!hideNavBar && <Footer />}
     </div>
   );
 }

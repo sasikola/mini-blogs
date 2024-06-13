@@ -12,6 +12,16 @@ import Home from "./Pages/Home";
 import Footer from "./Components/Footer";
 import Navbar from "./Components/Navbar";
 import NotFound from "./Pages/NotFound"; // Import the NotFound component
+import PostItem from "./Components/PostItem";
+import PostDetails from "./Pages/PostDetails";
+import UserProfile from "./Pages/UserProfile";
+import Authors from "./Pages/Authors";
+import CreatePost from "./Pages/CreatePost";
+import EditPost from "./Pages/EditPost";
+import CategoryPosts from "./Pages/CategoryPosts";
+import AuthorPosts from "./Pages/AuthorPosts";
+import Dashboard from "./Pages/Dashboard";
+import Logout from "./Pages/Logout";
 
 function App() {
   return (
@@ -33,7 +43,17 @@ function Main() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="*" element={<NotFound />} /> {/* Wildcard route */}
+        <Route path="/posts/:id" element={<PostDetails />} />
+        <Route path="/profile/:id" element={<UserProfile />} />
+        <Route path="/authors" element={<Authors />} />
+        <Route path="/create" element={<CreatePost />} />
+        <Route path="/posts/:id/edit" element={<EditPost />} />
+        <Route path="/posts/categories/:categories" element={<CategoryPosts />} />
+        <Route path="/posts/users/:id" element={<AuthorPosts />} />
+        <Route path="/myposts/:id" element={<Dashboard />} />
+        <Route path="/logout" element={<Logout />} />
+
+        <Route path="*" element={<NotFound />} /> 
       </Routes>
       {!hideNavBar && <Footer />}
     </div>

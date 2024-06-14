@@ -137,7 +137,8 @@ const Navbar = () => {
         <ul className="flex gap-8 text-base text-black dark:text-white">
           <Link to="/">Home</Link>
           <Link to="/">Create Post</Link>
-          <Link to="/">Authors</Link>
+          <Link to="/authors">Authors</Link>
+          <Link to="/profile/kalkhlakhgalgit ">Profile</Link>
         </ul>
 
         <div className="flex gap-2 items-center cursor-pointer">

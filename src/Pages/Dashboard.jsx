@@ -26,19 +26,19 @@ function Dashboard() {
                     <div className="mt-2 space-y-2 sm:space-y-0 sm:space-x-4 flex sm:justify-end">
                       <Link
                         to={`/posts/${post.id}`}
-                        className="block w-full sm:w-auto text-center sm:text-right text-blue-500 hover:text-blue-700 md:bg-blue-500 hover:bg-blue-700 md:text-white font-semibold py-2 px-4 rounded-md transition duration-300 mt-2 sm:mt-0"
+                        className="block w-full sm:w-auto text-center sm:text-right text-blue-500 hover:text-blue-700 md:bg-blue-500 md:hover:bg-blue-700 md:text-white font-semibold py-2 px-4 rounded-md transition duration-300 mt-2 sm:mt-0"
                       >
                         View
                       </Link>
                       <Link
                         to={`/posts/${post.id}/edit`}
-                        className="block w-full sm:w-auto text-center sm:text-right text-yellow-500 hover:text-yellow-700 md:bg-yellow-500 hover:bg-yellow-700 md:text-white font-semibold py-2 px-4 rounded-md transition duration-300 mt-2 sm:mt-0"
+                        className="block w-full sm:w-auto text-center sm:text-right text-yellow-500 hover:text-yellow-700 md:bg-yellow-500 md:hover:bg-yellow-700 md:text-white font-semibold py-2 px-4 rounded-md transition duration-300 mt-2 sm:mt-0"
                       >
                         Edit
                       </Link>
                       <Link
                         to={`/posts/${post.id}/delete`}
-                        className="block w-full sm:w-auto text-center sm:text-right text-red-500 hover:text-red-700 md:bg-red-500 hover:bg-red-700 md:text-white font-semibold py-2 px-4 rounded-md transition duration-300 mt-2 sm:mt-0"
+                        className="block w-full sm:w-auto text-center sm:text-right text-red-500 hover:text-red-700 md:bg-red-500 md:hover:bg-red-700 md:text-white font-semibold py-2 px-4 rounded-md transition duration-300 mt-2 sm:mt-0"
                       >
                         Delete
                       </Link>

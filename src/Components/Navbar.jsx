@@ -4,7 +4,8 @@ import {
   FaFacebook,
   FaInstagram,
   FaTwitterSquare,
-  FaYoutube,
+  FaLinkedin,
+  
 } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import Button from "./Button";
@@ -121,16 +122,16 @@ const Navbar = () => {
   return (
     <nav className="flex sticky top-0 z-10 flex-row pl-2 pr-1  md:flex-row w-full py-5  items-center justify-between gap-4 md:gap-0 dark:bg-[#020b19] ">
       <div className="flex gap-2 text-[20px] md:hidden lg:flex">
-        <Link to="/" className="text-red-600">
-          <FaYoutube />
+        <Link to="https://www.linkedin.com/in/sasikiran-kola/" className="text-blue-600">
+          <FaLinkedin />
         </Link>
-        <Link to="/" className="text-blue-600">
+        <Link to="https://www.facebook.com/sasikiran.kiran.5/" className="text-blue-600">
           <FaFacebook />
         </Link>
-        <Link to="/" className="text-rose-600">
+        <Link to="https://www.instagram.com/mr_sasi_03/" className="text-rose-600">
           <FaInstagram />
         </Link>
-        <Link to="/" className="text-blue-500">
+        <Link to="https://twitter.com/SasiKiran_03" className="text-blue-500">
           <FaTwitterSquare />
         </Link>
       </div>

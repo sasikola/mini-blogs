@@ -58,6 +58,16 @@ const CreatePost = () => {
     "image",
     "video",
   ];
+  const categories = [
+    "Agriculture",
+    "Business",
+    "Education",
+    "Entertainment",
+    "Art",
+    "Investment",
+    "Weather",
+    "Technology",
+  ];
 
   return (
     <>
@@ -116,11 +126,11 @@ const CreatePost = () => {
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               required
             >
-              <option value="Uncategorized">Uncategorized</option>
-              <option value="Technology">Technology</option>
-              <option value="Travel">Travel</option>
-              <option value="Food">Food</option>
-              {/* Add more categories as needed */}
+              {categories.map((cat) => (
+                <option key={cat} value={cat}>
+                  {cat}
+                </option>
+              ))}
             </select>
           </div>
           <div className="mb-6">

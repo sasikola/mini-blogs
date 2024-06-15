@@ -56,10 +56,13 @@ const MobileMenu = ({ user, signOut }) => {
               <Link to="/">Home</Link>
             </li>
             <li onClick={toggleMenu}>
-              <Link to="/">Contact</Link>
+              <Link to="/">Create Post</Link>
             </li>
             <li onClick={toggleMenu}>
-              <Link to="/">About</Link>
+              <Link to="/authors">Authors</Link>
+            </li>
+            <li>
+              <Link to="/profile/kalkhlakhgalgit ">Profile</Link>
             </li>
           </ul>
           <div className="flex gap-2 items-center">

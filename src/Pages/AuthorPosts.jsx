@@ -6,7 +6,7 @@ function AuthorPosts() {
   const [posts, setPosts] = useState(dummyPosts);
   return (
     <>
-      <section className="posts mt-6 ml-20 mr-20">
+      <section className="posts mt-6 md:ml-20 md:mr-20">
         {posts.length > 0 ? (
           <div className="container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16">
             {posts.map(

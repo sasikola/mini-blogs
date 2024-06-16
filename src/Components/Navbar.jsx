@@ -54,21 +54,14 @@ const MobileMenu = ({ signOut }) => {
               <Link to="/authors">Authors</Link>
             </li>
           </ul>
-          <div className="flex gap-2 items-center">
+          <div>
             {userInfo?.token ? (
               <div className="w-full flex  flex-col items-center justify-center ">
-                <div className="flex gap-1 items-center mb-5">
-                  {userInfo?.profilePicture ? (
-                    <img
-                      src={userInfo?.profilePicture}
-                      alt="Profile"
-                      className="rounded-full w-14 h-14 object-cover"
-                    />
-                  ) : (
-                    <span className="text-white w-8 h-8 rounded-fullflex items-center justify-center">
-                      {userInfo?.firstName}
-                    </span>
-                  )}
+                <div className="flex gap-1 items-center cursor-pointer mb-3 mr-3">
+                  <span className="text-white rounded-full flex items-center justify-center">
+                    {userInfo?.firstName +  " " + userInfo?.lastName}
+
+                  </span>
                 </div>
 
                 <button

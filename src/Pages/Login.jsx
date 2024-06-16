@@ -1,17 +1,22 @@
 import React, { useState } from "react";
 import { FcGoogle } from "react-icons/fc";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Logo from "../Components/Logo";
 import Button from "../Components/Button";
 import Divider from "../Components/Divider";
 import Inputbox from "../Components/Inputbox";
+import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { userLogin } from "../Redux/authSlice";
+import Swal from "sweetalert2";
 
 const Login = () => {
-
   const [data, setData] = useState({
-    email: "",
+    phone: "",
     password: "",
   });
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     // const [name, value] = e.target; change to one below
@@ -22,7 +27,27 @@ const Login = () => {
     });
   };
 
-  const handleSubmit = async () => {};
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      dispatch(userLogin(data)).then((res) => {
+        if (!res.error) {
+          Swal.fire({
+            title: "Success",
+            text: res.payload.message,
+          });
+          navigate("/");
+        } else {
+          Swal.fire({
+            title: "Error",
+            text: res.payload,
+          });
+        }
+      });
+    } catch (error) {
+      Swal.fire({  title: "Error",text: error });
+    }
+  };
 
   return (
     <div className="flex w-full  h-[100vh]">
@@ -54,12 +79,12 @@ const Login = () => {
             <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
               <div className="flex flex-col rounded-md shadow-sm -space-y-px gap-5">
                 <Inputbox
-                  label="Email Address"
-                  name="email"
-                  type="email"
+                  label="Mobile Number"
+                  name="phone"
+                  type="phone"
                   isRequired={true}
-                  placeholder="email@example.com"
-                  value={data?.email}
+                  placeholder="987653210"
+                  value={data?.phone}
                   onChange={handleChange}
                 />
 

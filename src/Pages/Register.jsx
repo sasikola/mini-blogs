@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { BiImages } from "react-icons/bi";
 import { IoArrowBackCircleSharp } from "react-icons/io5";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Logo from "../Components/Logo";
 import Inputbox from "../Components/Inputbox";
 import Button from "../Components/Button";
+import Swal from "sweetalert2";
+import { useDispatch } from "react-redux";
+import { userRegister } from "../Redux/authSlice";
 
 const Register = () => {
   const user = {};
@@ -12,11 +15,14 @@ const Register = () => {
   const [data, setData] = useState({
     firstName: "",
     lastName: "",
+    phone: "",
     email: "",
     password: "",
   });
   const [file, setFile] = useState("");
   const [fileURL, setFileURL] = useState("");
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const handleChange = (e) => {
     // const [name, value] = e.target;
@@ -27,7 +33,27 @@ const Register = () => {
     });
   };
 
-  const handleSubmit = async () => {};
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    try {
+      dispatch(userRegister(data)).then((res) => {
+        if (!res.error) {
+          Swal.fire({
+            title: "Success",
+            text: res.payload.message,
+          });
+          navigate("/login");
+        } else {
+          Swal.fire({
+            title: "Error",
+            text: res.payload,
+          });
+        }
+      });
+    } catch (error) {
+      Swal.fire({ title: "Error", text: error });
+    }
+  };
 
   if (user.token) window.location.replace("/");
 
@@ -90,6 +116,15 @@ const Register = () => {
                     onChange={handleChange}
                   />
                 </div>
+                <Inputbox
+                  label="Phone Number"
+                  name="phone"
+                  type="phone"
+                  isRequired={true}
+                  placeholder="908765321"
+                  value={data.phone}
+                  onChange={handleChange}
+                />
 
                 <Inputbox
                   label="Email Address"

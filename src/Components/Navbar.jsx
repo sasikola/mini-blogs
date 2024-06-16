@@ -5,24 +5,15 @@ import {
   FaInstagram,
   FaTwitterSquare,
   FaLinkedin,
-  
 } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import Button from "./Button";
 import Logo from "./Logo";
+import { useSelector } from "react-redux";
 
-function getInitials(fullName) {
-  const names = fullName.split(" ");
-
-  const initials = names.slice(0, 2).map((name) => name[0].toUpperCase());
-
-  const initialsStr = initials.join("");
-
-  return initialsStr;
-}
-
-const MobileMenu = ({ user, signOut }) => {
+const MobileMenu = ({ signOut }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { userInfo } = useSelector((state) => state.auth);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -62,27 +53,24 @@ const MobileMenu = ({ user, signOut }) => {
             <li onClick={toggleMenu}>
               <Link to="/authors">Authors</Link>
             </li>
-            <li>
-              <Link to="/profile/kalkhlakhgalgit ">Profile</Link>
-            </li>
           </ul>
           <div className="flex gap-2 items-center">
-            {user?.token ? (
+            {userInfo?.token ? (
               <div className="w-full flex  flex-col items-center justify-center ">
                 <div className="flex gap-1 items-center mb-5">
-                  {user?.user.image ? (
+                  {userInfo?.profilePicture ? (
                     <img
-                      src={user?.user.image}
+                      src={userInfo?.profilePicture}
                       alt="Profile"
                       className="w-8 h-8 rounded-full"
                     />
                   ) : (
                     <span className="text-white w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center">
-                      {getInitials(user?.user.name)}
+                      {userInfo?.firstName}
                     </span>
                   )}
                   <span className="font-medium text-black dark:text-gray-500">
-                    {user?.user.name}
+                    {userInfo?.firstName}
                   </span>
                 </div>
 
@@ -116,19 +104,28 @@ const MobileMenu = ({ user, signOut }) => {
 };
 
 const Navbar = () => {
-  const user = {};
   const [showProfile, setShowProfile] = useState(false);
+  const { userInfo } = useSelector((state) => state.auth);
 
   return (
     <nav className="flex sticky top-0 z-10 flex-row pl-2 pr-1  md:flex-row w-full py-5  items-center justify-between gap-4 md:gap-0 dark:bg-[#020b19] ">
       <div className="flex gap-2 text-[20px] md:hidden lg:flex">
-        <Link to="https://www.linkedin.com/in/sasikiran-kola/" className="text-blue-600">
+        <Link
+          to="https://www.linkedin.com/in/sasikiran-kola/"
+          className="text-blue-600"
+        >
           <FaLinkedin />
         </Link>
-        <Link to="https://www.facebook.com/sasikiran.kiran.5/" className="text-blue-600">
+        <Link
+          to="https://www.facebook.com/sasikiran.kiran.5/"
+          className="text-blue-600"
+        >
           <FaFacebook />
         </Link>
-        <Link to="https://www.instagram.com/mr_sasi_03/" className="text-rose-600">
+        <Link
+          to="https://www.instagram.com/mr_sasi_03/"
+          className="text-rose-600"
+        >
           <FaInstagram />
         </Link>
         <Link to="https://twitter.com/SasiKiran_03" className="text-blue-500">
@@ -142,35 +139,31 @@ const Navbar = () => {
           <Link to="/">Home</Link>
           <Link to="/create">Create Post</Link>
           <Link to="/authors">Authors</Link>
-          <Link to="/profile/kalkhlakhgalgit ">Profile</Link>
         </ul>
 
         <div className="flex gap-2 items-center cursor-pointer">
-          {user?.token ? (
+          {userInfo?.token ? (
             <div
               className="relative"
               onClick={() => setShowProfile((prev) => !prev)}
             >
-              <div className="flex gap-1 items-center cursor-pointer">
-                {user?.user.image ? (
+              <div className="flex gap-1 items-center cursor-pointer mr-6">
+                {userInfo?.profilePicture ? (
                   <img
-                    src={user?.user.image}
+                    src={userInfo?.profilePicture}
                     alt="Profile"
-                    className="w-8 h-8 rounded-full"
+                    className="rounded-full w-14 h-14 object-cover"
                   />
                 ) : (
-                  <span className="text-white w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center">
-                    {getInitials(user?.user.name)}
+                  <span className="text-white rounded-full flex items-center justify-center bg-gray-500 w-9 h-9">
+                    {userInfo?.firstName.charAt(0)}
                   </span>
                 )}
-                <span className="font-medium text-black dark:text-gray-500">
-                  {user?.user?.name?.split(" ")[0]}
-                </span>
               </div>
 
               {showProfile && (
                 <div className="absolute bg-white dark:bg-[#2f2d30] py-6 px-6 flex flex-col shadow-2xl z-50 right-0 gap-3 rounded">
-                  <span className="dark:text-white">Profile</span>
+                  <Link to="/profile/kalkhlakhgalgit" className="text-white">Profile</Link>
                   <span className="border-t border-slate-300 text-rose-700">
                     Logout
                   </span>
@@ -188,7 +181,7 @@ const Navbar = () => {
         </div>
       </div>
       <div className="block md:hidden">
-        <MobileMenu user={user} />
+        <MobileMenu />
       </div>
     </nav>
   );

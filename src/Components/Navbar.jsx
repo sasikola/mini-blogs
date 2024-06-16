@@ -62,16 +62,13 @@ const MobileMenu = ({ signOut }) => {
                     <img
                       src={userInfo?.profilePicture}
                       alt="Profile"
-                      className="w-8 h-8 rounded-full"
+                      className="rounded-full w-14 h-14 object-cover"
                     />
                   ) : (
-                    <span className="text-white w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center">
+                    <span className="text-white w-8 h-8 rounded-fullflex items-center justify-center">
                       {userInfo?.firstName}
                     </span>
                   )}
-                  <span className="font-medium text-black dark:text-gray-500">
-                    {userInfo?.firstName}
-                  </span>
                 </div>
 
                 <button

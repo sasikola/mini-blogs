@@ -9,14 +9,19 @@ import {
 import { Link } from "react-router-dom";
 import Button from "./Button";
 import Logo from "./Logo";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../Redux/authSlice";
 
-const MobileMenu = ({ signOut }) => {
+const MobileMenu = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { userInfo } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
+  };
+  const handleLogout = () => {
+    dispatch(logout());
   };
 
   return (
@@ -59,14 +64,13 @@ const MobileMenu = ({ signOut }) => {
               <div className="w-full flex  flex-col items-center justify-center ">
                 <div className="flex gap-1 items-center cursor-pointer mb-3 mr-3">
                   <span className="text-white rounded-full flex items-center justify-center">
-                    {userInfo?.firstName +  " " + userInfo?.lastName}
-
+                    {userInfo?.firstName + " " + userInfo?.lastName}
                   </span>
                 </div>
 
                 <button
                   className="bg-black dark:bg-rose-600 text-white dark:text-white px-8 py-1.5 rounded-full text-center outline-none"
-                  onClick={() => signOut()}
+                  onClick={handleLogout}
                 >
                   Logout
                 </button>
@@ -96,7 +100,11 @@ const MobileMenu = ({ signOut }) => {
 const Navbar = () => {
   const [showProfile, setShowProfile] = useState(false);
   const { userInfo } = useSelector((state) => state.auth);
-
+  const dispatch = useDispatch();
+  
+  const handleLogout = () => {
+    dispatch(logout());
+  };
   return (
     <nav className="flex sticky top-0 z-10 flex-row pl-2 pr-1  md:flex-row w-full py-5  items-center justify-between gap-4 md:gap-0 dark:bg-[#020b19] ">
       <div className="flex gap-2 text-[20px] md:hidden lg:flex">
@@ -156,7 +164,10 @@ const Navbar = () => {
                   <Link to="/profile/kalkhlakhgalgit" className="text-white">
                     Profile
                   </Link>
-                  <span className="border-t border-slate-300 text-rose-700">
+                  <span
+                    onClick={handleLogout}
+                    className="border-t border-slate-300 text-rose-700"
+                  >
                     Logout
                   </span>
                 </div>

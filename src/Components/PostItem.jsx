@@ -9,8 +9,11 @@ function PostItem({ postId, category, title, description, author, thumbnail }) {
       : description;
   const postTitle = title.length > 30 ? title.substring(0, 30) + "..." : title;
 
-  const thumbnailPath = thumbnail.length > 0 ? thumbnail[0].replace(/\\/g, "/") : null;
-  const imageUrl = thumbnailPath ? `https://miniblogs-s2iy.onrender.com/${thumbnailPath}` : null;
+  const thumbnailPath =
+    thumbnail.length > 0 ? thumbnail[0].replace(/\\/g, "/") : null;
+  const imageUrl = thumbnailPath
+    ? `https://miniblogs-s2iy.onrender.com/${thumbnailPath}`
+    : null;
 
   return (
     <>
@@ -34,7 +37,10 @@ function PostItem({ postId, category, title, description, author, thumbnail }) {
           </Link>
           <p className="text-gray-700">{shortDescription}</p>
           <div className="flex justify-between items-end mt-8">
-            <PostAuthor author={`${author.firstName} ${author.lastName}`} />
+            <PostAuthor
+              id={author._id}
+              author={`${author?.firstName} ${author?.lastName}`}
+            />
             <Link
               to={`/posts/categories/${category}`}
               className="inline-block px-2 py-1 mt-4 text-blue-500 rounded transition duration-200 ease-in-out hover:text-white hover:bg-blue-500"

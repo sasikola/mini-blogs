@@ -2,10 +2,10 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Avatar from "../images/avatar1.jpg";
 
-function PostAuthor({ author }) {
+function PostAuthor({ author, id }) {
   return (
     <>
-      <Link to={`/posts/users/${author}`} className="flex gap-4 items-start">
+      <Link to={`/posts/users/${id}`}className="flex gap-4 items-start">
         <div className="w-10 h-10 rounded-[29%] overflow-hidden">
           <img
             src={Avatar}

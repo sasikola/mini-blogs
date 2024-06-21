@@ -77,7 +77,14 @@ function Main() {
             }
           />
           <Route path="/authors" element={<Authors />} />
-          <Route path="/create" element={<CreatePost />} />
+          <Route
+            path="/create"
+            element={
+              <ProtectedRoutes>
+                <CreatePost />
+              </ProtectedRoutes>
+            }
+          />
           <Route
             path="/posts/:id/edit"
             element={

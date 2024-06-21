@@ -23,9 +23,9 @@ export const fetchAllBlogs = createAsyncThunk(
   }
 );
 
-// async thunk for fetch single product
-export const getSingleProduct = createAsyncThunk(
-  "products/getSingleProduct",
+// async thunk for fetch all authors
+export const getAuthors = createAsyncThunk(
+  "blog/getAuthors",
   async (id, { rejectWithValue }) => {
     try {
       const config = {
@@ -33,7 +33,7 @@ export const getSingleProduct = createAsyncThunk(
           "Content-Type": "application/json",
         },
       };
-      const { data } = await RestApi.get(`/user/singleProduct/${id}`, config);
+      const { data } = await RestApi.get(`/user/authors`, config);
       return data;
     } catch (error) {
       if (error.response && error.response.data.message) {
@@ -44,18 +44,24 @@ export const getSingleProduct = createAsyncThunk(
   }
 );
 
-// async thunk for fetch single product
-export const getAuthors = createAsyncThunk(
-  "products/getAuthors",
-  async (id, { rejectWithValue }) => {
+// async thunk to create a blog post
+export const createBlog = createAsyncThunk(
+  "blog/createBlog",
+  async (formData, { getState, rejectWithValue }) => {
     try {
+      const { userInfo } = getState().auth;
       const config = {
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${userInfo?.token}`,
         },
       };
-      const { data } = await RestApi.get(`/user/authors`, config);
-      return data;
+      const response = await RestApi.post(
+        "/user/blog/create",
+        formData,
+        config
+      );
+      return response.data;
     } catch (error) {
       if (error.response && error.response.data.message) {
         return rejectWithValue(error.response.data.message);
@@ -94,14 +100,13 @@ const blogSlice = createSlice({
         state.status = "failed";
         state.error = action.payload;
       })
-      .addCase(getSingleProduct.pending, (state) => {
+      .addCase(createBlog.pending, (state) => {
         state.status = "loading";
       })
-      .addCase(getSingleProduct.fulfilled, (state, action) => {
+      .addCase(createBlog.fulfilled, (state, action) => {
         state.status = "succeeded";
-        state.product = action.payload;
       })
-      .addCase(getSingleProduct.rejected, (state, action) => {
+      .addCase(createBlog.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.payload;
       })

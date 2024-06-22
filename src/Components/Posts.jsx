@@ -13,7 +13,6 @@ function Posts() {
   useEffect(() => {
     dispatch(fetchAllBlogs());
   }, [dispatch]);
- 
 
   return (
     <>
@@ -22,7 +21,7 @@ function Posts() {
           <div className="container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16">
             {blogList &&
               blogList.map(
-                ({ id, images, category, title, description, author }) => (
+                ({ id, images, category, title, description, author, createdAt }) => (
                   <div
                     key={id}
                     className="bg-white rounded-lg p-8 shadow-lg transition-all duration-200 ease-in-out cursor-pointer relative overflow-hidden w-full h-full hover:shadow-2xl"
@@ -34,6 +33,7 @@ function Posts() {
                       description={description}
                       author={author}
                       postId={id}
+                      createdAt={createdAt}
                     />
                   </div>
                 )

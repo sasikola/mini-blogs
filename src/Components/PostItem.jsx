@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import PostAuthor from "./PostAuthor";
 
-function PostItem({ postId, category, title, description, author, thumbnail }) {
+function PostItem({ postId, category, title, description, author, thumbnail, createdAt }) {
   const shortDescription =
     description.length > 145
       ? description.substring(0, 145) + "..."
@@ -40,6 +40,7 @@ function PostItem({ postId, category, title, description, author, thumbnail }) {
             <PostAuthor
               id={author._id}
               author={`${author?.firstName} ${author?.lastName}`}
+              createdAt={createdAt}
             />
             <Link
               to={`/posts/categories/${category}`}

@@ -1,13 +1,9 @@
-import React, { useEffect, useState } from "react";
-
+import React, { useEffect } from "react";
 import PostItem from "./PostItem";
-
-import { dummyPosts } from "../data";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAllBlogs } from "../Redux/blogSlice";
 
 function Posts() {
-  const [posts, setPosts] = useState(dummyPosts);
   const { blogList } = useSelector((state) => state.blog);
   const dispatch = useDispatch();
   useEffect(() => {

@@ -1,27 +1,50 @@
-import React, { useState } from "react";
-import { dummyPosts } from "../data";
+import React, { useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchAllBlogs } from "../Redux/blogSlice";
 import PostItem from "../Components/PostItem";
 
 function CategoryPosts() {
-  const [posts, setPosts] = useState(dummyPosts);
+  const { categories } = useParams();
+  const { blogList } = useSelector((state) => state.blog);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchAllBlogs());
+  }, [dispatch]);
+  console.log(categories);
+
+  const filteredPosts = blogList?.filter(
+    (post) => post.category === categories
+  );
+
   return (
     <>
-      <section className="posts mt-6 md:ml-20 md:mr-20">
-        {posts.length > 0 ? (
+      <section className="posts mt-6">
+        {filteredPosts && filteredPosts.length > 0 ? (
           <div className="container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16">
-            {posts.map(
-              ({ id, thumbnail, category, title, description, authorID }) => (
+            {filteredPosts.map(
+              ({
+                _id,
+                images,
+                category,
+                title,
+                description,
+                author,
+                createdAt,
+              }) => (
                 <div
-                  key={id}
+                  key={_id}
                   className="bg-white rounded-lg p-8 shadow-lg transition-all duration-200 ease-in-out cursor-pointer relative overflow-hidden w-full h-full hover:shadow-2xl"
                 >
                   <PostItem
-                    thumbnail={thumbnail}
+                    thumbnail={images}
                     category={category}
                     title={title}
                     description={description}
-                    authorID={authorID}
-                    postId={id}
+                    author={author}
+                    postId={_id}
+                    createdAt={createdAt}
                   />
                 </div>
               )
@@ -38,4 +61,5 @@ function CategoryPosts() {
     </>
   );
 }
+
 export default CategoryPosts;

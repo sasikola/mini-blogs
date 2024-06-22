@@ -17,13 +17,15 @@ function AuthorPosts() {
     (post) => post.author._id === authorId
   );
 
+ 
+
   return (
     <section className="posts mt-6">
       {filteredPosts && filteredPosts.length > 0 ? (
         <div className="container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16">
           {filteredPosts &&
             filteredPosts.map(
-              ({ id, images, category, title, description, author }) => (
+              ({ id, images, category, title, description, author, createdAt }) => (
                 <div
                   key={id}
                   className="bg-white rounded-lg p-8 shadow-lg transition-all duration-200 ease-in-out cursor-pointer relative overflow-hidden w-full h-full hover:shadow-2xl"
@@ -35,6 +37,7 @@ function AuthorPosts() {
                     description={description}
                     author={author}
                     postId={id}
+                    createdAt={createdAt}
                   />
                 </div>
               )

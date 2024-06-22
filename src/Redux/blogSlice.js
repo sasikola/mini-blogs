@@ -71,6 +71,30 @@ export const createBlog = createAsyncThunk(
   }
 );
 
+// async thunk for fetch all authors
+export const getPostByCategory = createAsyncThunk(
+  "blog/getPostByCategory",
+  async (category, { rejectWithValue }) => {
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
+      const { data } = await RestApi.get(
+        `/user/blog/categories/${category}`,
+        config
+      );
+      return data;
+    } catch (error) {
+      if (error.response && error.response.data.message) {
+        return rejectWithValue(error.response.data.message);
+      }
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
 // Auth slice with initial state
 const blogSlice = createSlice({
   name: "blog",
@@ -78,6 +102,7 @@ const blogSlice = createSlice({
     loading: false,
     blogList: null,
     authors: null,
+    cat: null,
     error: null,
     success: null,
   },
@@ -118,6 +143,17 @@ const blogSlice = createSlice({
         state.authors = action.payload;
       })
       .addCase(getAuthors.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.payload;
+      })
+      .addCase(getPostByCategory.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(getPostByCategory.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        state.blogList = action.payload;
+      })
+      .addCase(getPostByCategory.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.payload;
       });

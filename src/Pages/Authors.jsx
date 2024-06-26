@@ -15,7 +15,7 @@ function Authors() {
     <section className="authors mt-6 mx-20">
       {authors && authors.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
-          {authors.map(({ _id, firstName, lastName, avatar, posts }) => (
+          {authors?.map(({ _id, firstName, lastName, avatar, posts }) => (
             <Link
               to={`/posts/users/${_id}`}
               key={_id}

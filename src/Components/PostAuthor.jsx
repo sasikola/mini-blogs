@@ -18,7 +18,7 @@ function PostAuthor({ author, id, createdAt }) {
         />
       </div>
       <div className="author-details">
-        <h5 className="text-base font-medium">By: {author}</h5>
+        <h5 className="text-base font-medium">By: {author.firstName} {author.lastName}</h5>
         <small className="text-gray-500">{formattedDate}</small>
       </div>
     </Link>

@@ -2,7 +2,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import RestApi from "../api/RestApi";
 
-// Async thunk for fetch all products
+// Async thunk for fetch all post
 export const fetchAllBlogs = createAsyncThunk(
   "blog/fetchAllBlogs",
   async (_, { rejectWithValue }) => {
@@ -15,6 +15,28 @@ export const fetchAllBlogs = createAsyncThunk(
       const { data } = await RestApi.get("/user/blogs", config);
       return data;
     } catch (error) {
+      if (error.response && error.response.data.message) {
+        return rejectWithValue(error.response.data.message);
+      }
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+// async thunk to fetch single post
+export const fetchSingleBlog = createAsyncThunk(
+  "blog/fetchSingleBlog",
+  async (id, { rejectWithValue }) => {
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
+      const { data } = await RestApi.get(`/user/blog/${id}`, config);
+      return data;
+    } catch (error) {
+      console.error("Error fetching blog:", error);
       if (error.response && error.response.data.message) {
         return rejectWithValue(error.response.data.message);
       }
@@ -101,6 +123,7 @@ const blogSlice = createSlice({
   initialState: {
     loading: false,
     blogList: null,
+    blog: null,
     authors: null,
     cat: null,
     error: null,
@@ -155,6 +178,18 @@ const blogSlice = createSlice({
       })
       .addCase(getPostByCategory.rejected, (state, action) => {
         state.status = "failed";
+        state.error = action.payload;
+      })
+      .addCase(fetchSingleBlog.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchSingleBlog.fulfilled, (state, action) => {
+        state.loading = false;
+        state.blog = action.payload;
+      })
+      .addCase(fetchSingleBlog.rejected, (state, action) => {
+        state.loading = false;
         state.error = action.payload;
       });
   },

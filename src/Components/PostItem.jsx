@@ -40,7 +40,6 @@ function PostItem({ postId, category, title, description, author, thumbnail, cre
           <p className="text-gray-700">{shortDescription}</p>
           <div className="flex justify-between items-end mt-8">
             <PostAuthor
-              id={author._id}
               author={`${author?.firstName} ${author?.lastName}`}
               createdAt={createdAt}
             />

@@ -8,6 +8,8 @@ function PostAuthor({ author, id, createdAt }) {
     addSuffix: true,
   });
 
+
+
   return (
     <Link to={`/posts/users/${id}`} className="flex gap-4 items-start">
       <div className="w-10 h-10 rounded-[29%] overflow-hidden">
@@ -18,7 +20,7 @@ function PostAuthor({ author, id, createdAt }) {
         />
       </div>
       <div className="author-details">
-        <h5 className="text-base font-medium">By: {author.firstName} {author.lastName}</h5>
+        <h5 className="text-base font-medium">By: {author}</h5>
         <small className="text-gray-500">{formattedDate}</small>
       </div>
     </Link>

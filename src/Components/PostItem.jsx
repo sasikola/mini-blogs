@@ -2,7 +2,15 @@ import React from "react";
 import { Link } from "react-router-dom";
 import PostAuthor from "./PostAuthor";
 
-function PostItem({ postId, category, title, description, author, thumbnail, createdAt }) {
+function PostItem({
+  postId,
+  category,
+  title,
+  description,
+  author,
+  thumbnail,
+  createdAt,
+}) {
   const shortDescription =
     description.length > 145
       ? description.substring(0, 145) + "..."
@@ -15,7 +23,6 @@ function PostItem({ postId, category, title, description, author, thumbnail, cre
     ? `https://miniblogs-s2iy.onrender.com/${thumbnailPath}`
     : null;
 
-  
 
   return (
     <>
@@ -40,6 +47,7 @@ function PostItem({ postId, category, title, description, author, thumbnail, cre
           <p className="text-gray-700">{shortDescription}</p>
           <div className="flex justify-between items-end mt-8">
             <PostAuthor
+              id={author?._id}
               author={`${author?.firstName} ${author?.lastName}`}
               createdAt={createdAt}
             />

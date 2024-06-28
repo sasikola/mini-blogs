@@ -10,6 +10,8 @@ function Posts() {
     dispatch(fetchAllBlogs());
   }, [dispatch]);
 
+  if (!blogList) return <p>Loading...</p>;
+
   return (
     <>
       <section className="posts mt-6">

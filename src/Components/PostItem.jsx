@@ -23,7 +23,6 @@ function PostItem({
     ? `https://miniblogs-s2iy.onrender.com/${thumbnailPath}`
     : null;
 
-
   return (
     <>
       <article className="transition-all duration-200 ease-in-out cursor-pointer relative overflow-hidden w-full h-full">

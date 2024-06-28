@@ -25,9 +25,9 @@ function AuthorPosts() {
         <div className="container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16">
           {filteredPosts &&
             filteredPosts.map(
-              ({ id, images, category, title, description, author, createdAt }) => (
+              ({ _id, images, category, title, description, author, createdAt }) => (
                 <div
-                  key={id}
+                  key={_id}
                   className="bg-white rounded-lg p-8 shadow-lg transition-all duration-200 ease-in-out cursor-pointer relative overflow-hidden w-full h-full hover:shadow-2xl"
                 >
                   <PostItem
@@ -36,7 +36,7 @@ function AuthorPosts() {
                     title={title}
                     description={description}
                     author={author}
-                    postId={id}
+                    postId={_id}
                     createdAt={createdAt}
                   />
                 </div>

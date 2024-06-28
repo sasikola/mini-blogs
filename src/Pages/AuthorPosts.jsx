@@ -14,7 +14,7 @@ function AuthorPosts() {
   }, [dispatch]);
 
   const filteredPosts = blogList?.filter(
-    (post) => post.author._id === authorId
+    (post) => post.author?._id === authorId
   );
 
  

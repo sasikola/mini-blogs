@@ -9,12 +9,14 @@ import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { userLogin } from "../Redux/authSlice";
 import Swal from "sweetalert2";
+import axios from "axios";
 
 const Login = () => {
   const [data, setData] = useState({
     phone: "",
     password: "",
   });
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -34,7 +36,7 @@ const Login = () => {
         if (!res.error) {
           Swal.fire({
             title: "Success",
-            text: res.payload.message,
+            text: "User logged in successfully",
           });
           navigate("/");
         } else {
@@ -42,10 +44,11 @@ const Login = () => {
             title: "Error",
             text: res.payload,
           });
+          console.log(res)
         }
       });
     } catch (error) {
-      Swal.fire({  title: "Error",text: error });
+      Swal.fire({ title: "Error", text: error });
     }
   };
 

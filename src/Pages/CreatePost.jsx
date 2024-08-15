@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { createBlog } from "../Redux/blogSlice";
 import Swal from "sweetalert2";
 import { convert } from "html-to-text";
+import { useNavigate } from "react-router-dom";
 
 const CreatePost = () => {
   const [title, setTitle] = useState("");
@@ -13,13 +14,14 @@ const CreatePost = () => {
   const [thumbnail, setThumbnail] = useState(null);
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     const formData = new FormData();
     formData.append("title", title);
-    formData.append("description", convert(description, { wordwrap: 130 })); 
+    formData.append("description", convert(description, { wordwrap: 130 }));
     formData.append("category", category);
     if (thumbnail) {
       formData.append("images", thumbnail);
@@ -31,6 +33,7 @@ const CreatePost = () => {
           title: "Success",
           text: res.payload.message,
         });
+        navigate("/");
       } else {
         Swal.fire({
           title: "Error",
@@ -179,7 +182,7 @@ const CreatePost = () => {
             type="submit"
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
           >
-            Create Post
+            Create
           </button>
         </div>
       </form>

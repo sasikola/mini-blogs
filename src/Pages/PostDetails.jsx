@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import PostAuthor from "../Components/PostAuthor";
 import { fetchSingleBlog } from "../Redux/blogSlice";
-import thumbnail from "../images/blog22.jpg";
 
 function PostDetails() {
   const { userInfo } = useSelector((state) => state.auth);
@@ -16,6 +15,13 @@ function PostDetails() {
   }, [dispatch, id]);
 
   useEffect(() => {}, [blog, loading, error]);
+
+const thumbnail = blog?.images
+  const thumbnailPath =
+    thumbnail.length > 0 ? thumbnail[0].replace(/\\/g, "/") : null;
+  const imageUrl = thumbnailPath
+    ? `http://localhost:8000/${thumbnailPath}`
+    : null;
 
   return (
     <section className="max-w-2xl mx-auto bg-white rounded-lg shadow-lg p-8 transition-transform transform hover:scale-100 hover:shadow-2xl">
@@ -56,7 +62,7 @@ function PostDetails() {
             <h1 className="text-2xl font-semibold mb-4">{blog.title}</h1>
             <div className="post-detail-thumbnail mb-6">
               <img
-                src={blog.thumbnail || thumbnail}
+                src={imageUrl}
                 alt={blog.title}
                 className="w-full h-auto rounded-lg"
               />

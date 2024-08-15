@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+
 import Posts from "../Components/Posts";
 
 function Home() {

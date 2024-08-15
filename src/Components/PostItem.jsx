@@ -20,7 +20,7 @@ function PostItem({
   const thumbnailPath =
     thumbnail.length > 0 ? thumbnail[0].replace(/\\/g, "/") : null;
   const imageUrl = thumbnailPath
-    ? `https://miniblogs-s2iy.onrender.com/${thumbnailPath}`
+    ? `http://localhost:8000/${thumbnailPath}`
     : null;
 
   return (
@@ -47,7 +47,7 @@ function PostItem({
           <div className="flex justify-between items-end mt-8">
             <PostAuthor
               id={author?._id}
-              author={`${author?.firstName} ${author?.lastName}`}
+              author={author}
               createdAt={createdAt}
             />
             <Link

@@ -8,7 +8,7 @@ const PublicRoutes = ({ children }) => {
 
   return (
     <>
-      {userInfo !== null ? (
+      {userInfo && userInfo?.token !== null ? (
         <Navigate to="/" state={{ from: location }} replace />
       ) : (
         children
